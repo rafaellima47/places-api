@@ -1,41 +1,11 @@
 # Places API
 
-This is a NestJS API that can be run in two different ways: using Docker Compose for a testing environment and running locally connected to an existing PostgreSQL database.
-
 ## Dependencies
 
 - Node.js
 - npm (Node.js package manager)
 - Docker and Docker Compose (for Docker execution)
 - Access to a PostgreSQL database (for local execution)
-
-## Execution with Docker Compose (Test Environment)
-
-This approach uses Docker Compose to set up a test environment, including the API and a PostgreSQL database in separate containers.
-
-### Steps for Execution
-
-1. Clone the repository:
-
-   ```bash
-   git clone git@github.com:rafaellima47/places-api.git
-   ```
-
-2. Navigate to the project folder:
-
-   ```bash
-   cd places-api
-   ```
-
-3. Run the application with Docker Compose:
-
-   ```bash
-   docker-compose up
-   ```
-
-   This will start both the API and a PostgreSQL database for testing.
-
-4. The API will be available at `http://localhost:7001`.
 
 ## Local Execution with Existing Database
 
@@ -81,3 +51,52 @@ In this approach, you will run the API locally connecting it to an existing Post
    ```
 
 5. The API will be available at `http://localhost:7001`
+
+---
+
+### Endpoints
+
+#### HEAD /health-check
+
+#### GET /places
+
+- Description: Retrieves a list of places based on optional filter criteria.
+- Query Parameters (Optional): name, city, state
+- Response: Returns an array of places that match the filter criteria.
+
+#### GET /places/:id
+
+- Description: Retrieves a specific place by its ID.
+- Path Parameters: `id` (required) - The unique identifier of the place.
+- Response: Returns the details of the specified place.
+
+#### POST /places
+
+- Description: Creates a new place.
+- Body: name, state, city
+- Response: Returns the created place.
+
+#### PUT /places/:id
+
+- Description: Updates an existing place.
+- Path Parameters: `id` (required) - The unique identifier of the place to update.
+- Body: name, state, city (All fields are optional)
+- Response: Returns the updated place.
+
+#### DELETE /places/:id
+
+- Description: Soft deletes a place by marking it as deleted.
+- Path Parameters: `id` (required) - The unique identifier of the place to delete.
+- Response: Returns the updated place with `isDeleted` set to `true`.
+
+#### POST /users
+
+- Description: Registers a new user.
+- Body: email and password
+- Response: Returns the created user data.
+
+#### POST /users/authenticate
+
+- Description: Authenticates a user and returns a token.
+- Body:email and password
+- Response: Returns an authentication token.
